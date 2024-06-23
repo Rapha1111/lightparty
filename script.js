@@ -4,6 +4,9 @@ let dataArray;
 let source;
 var nbrep = 0;
 var total = 0;
+var color="white";
+var lastval=[]
+
 
 // Fonction pour initialiser le microphone et les composants audio
 async function initializeMicrophone() {
@@ -57,18 +60,24 @@ function getMicrophoneLevel() {
 function main(level){
     flashDiv=document.getElementById("flash")
     flashDiv.hidden=false
-    nbrep++
-    total+=level
-    moyenne=total/nbrep
-    console.log(moyenne)
+    lastval.push(level)
+    if (lastval.length>1000){
+        lastval.shift()
+    }
+    let somme = lastval.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante, 0);
+    let moyenne = somme / lastval.length;
     if (level>moyenne+10){
         flashDiv.classList.remove('black');
-        flashDiv.classList.add('white');
-        setTimeout(()=>{
-            flashDiv.classList.remove('white');
-            flashDiv.classList.add('black');
-        }, 10)
+        flashDiv.classList.add(color);
+    } else {
+        flashDiv.classList.remove(color);
+        flashDiv.classList.add('black');
+
     }
 }
-
-
+function changeColor(col, element) {
+    color = col;
+    let buttons = document.querySelectorAll('.color-buttons button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    element.classList.add('active');
+}
