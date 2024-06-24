@@ -66,9 +66,12 @@ function main(level){
     }
     let somme = lastval.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante, 0);
     let moyenne = somme / lastval.length;
-    if (level>moyenne+10){
+    if (level>(moyenne*1.1)){
         flashDiv.classList.remove('black');
         flashDiv.classList.add(color);
+        if (lastval.length>250){
+            lastval.splice(0, 50);
+        }
     } else {
         flashDiv.classList.remove(color);
         flashDiv.classList.add('black');
