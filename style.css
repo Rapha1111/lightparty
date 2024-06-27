@@ -73,3 +73,20 @@ button:hover {
 .violet-btn { background-color: #BD00FF; }
 .red-btn { background-color: #FF3200; }
 .blue-btn { background-color: #00FFFB; }
+
+.auto-btn { background-color: #4600FF; }
+.slider-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+.slider {
+  width: 100%;
+  margin: 10px 0;
+}
+.slider-value {
+  font-size: 1.2em;
+  color: #333;
+}
